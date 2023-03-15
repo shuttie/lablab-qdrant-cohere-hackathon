@@ -4,6 +4,13 @@ core:
 
 
 models:
+  trending:
+    type: trending
+    weights:
+      - interaction: click
+        decay: 1.0
+        weight: 1.0
+
   similar:
     type: als
     interactions: [click]
