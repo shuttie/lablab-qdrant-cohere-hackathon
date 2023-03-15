@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="album py-6 bg-light">
+    <div class="container">
+      <div class="col d-flex align-items-start py-5">
+        <img class="flex-shrink-0 me-3" height="225" src="{{ movie['poster'] }}">
+        <div>
+          <h3 class="fw-bold mb-0 fs-4">{{ movie['title'] }}</h3>
+          <p>{{ movie['description'] }}</p>
+        </div>
+      </div>
+    </div>
+    {% for source in recs %}
+    <div class="container">
+      <h2 class="pb-2 border-bottom">{{ source }}:</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
+      	{% for movie in recs[source] %}
+        <div class="col">
+          <div class="card shadow-sm">
+          	<img class="bd-placeholder-img card-img-top" height="225" src="{{ movie['poster'] }}">
+            <div class="card-body">
+              <p class="card-text"><h5>{{ movie['title'] }}</h5></p>
+              <p class="card-text">{{ movie['description'][:128] }}...<span class="collapse" id="more">asdasdasd</span></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="/rec/{{ movie['id'] }}"><button type="button" class="btn btn-sm btn-outline-secondary">Select</button></a>
+                </div>
+                <small class="text-muted">{{ movie['runtime'] }} mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="b-example-divider"></div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+

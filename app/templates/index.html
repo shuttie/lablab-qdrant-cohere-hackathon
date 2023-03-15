@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="https://raw.githubusercontent.com/metarank/metarank/master/doc/img/logo.svg" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold">Semantic movie recommendations</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">A demo made with co:here, Qdrant and Metarank, for the lablab.ai hackathon.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="/trending"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Show popular movies</button></a>
+        <a href="/about"><button type="button" class="btn btn-outline-secondary btn-lg px-4">About the project</button></a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

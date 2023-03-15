@@ -1,0 +1,33 @@
+core:
+  clickthrough:
+    maxSessionLength: 60s
+
+
+models:
+  trending:
+    type: trending
+    weights:
+      - interaction: click
+        decay: 1.0
+        weight: 1.0
+
+  similar:
+    type: als
+    interactions: [click]
+    factors: 100
+    iterations: 100
+
+  minilm:
+    type: semantic
+    itemFields: [title, description]
+    encoder:
+      type: bert
+      model: sentence-transformer/all-MiniLM-L6-v2
+
+
+  cohere:
+    type: semantic
+    itemFields: [title, description]
+    encoder:
+      type: csv
+      path: /home/shutty/work/metarank/cohere/cohere-large.csv

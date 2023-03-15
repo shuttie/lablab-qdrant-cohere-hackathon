@@ -1,0 +1,45 @@
+core:
+  clickthrough:
+    maxSessionLength: 60s
+
+
+models:
+  similar:
+    type: als
+    interactions: [click]
+    factors: 100
+    iterations: 100
+    store:
+      size: 100
+      distance: Cosine
+      type: qdrant
+      endpoint: http://qdrant:6333
+      collection: similar
+
+  minilm:
+    type: semantic
+    itemFields: [title, description]
+    encoder:
+      type: bert
+      model: sentence-transformer/all-MiniLM-L6-v2
+    store:
+      size: 384
+      distance: Cosine
+      type: qdrant
+      endpoint: http://qdrant:6333
+      collection: minilm
+
+
+  cohere:
+    type: semantic
+    itemFields: [title, description]
+    store:
+      size: 4096
+      distance: Cosine
+      type: qdrant
+      endpoint: http://qdrant:6333
+      collection: cohere
+
+    encoder:
+      type: csv
+      path: /conf/cohere-large.csv
