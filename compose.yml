@@ -4,7 +4,7 @@ services:
   flask:
     build:
       context: app
-      target: builder
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     environment:
@@ -21,6 +21,6 @@ services:
     ports:
       - 8080:8080
     environment:
-      - JAVA_OPTS=-Xmx4g
+      - JAVA_OPTS=-Xmx1g
     volumes:
       - .:/conf/
