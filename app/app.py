@@ -2,6 +2,7 @@ from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template
 import requests
 import json
+import os
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ for json_str in json_list:
     movie = json.loads(json_str)
     movies[str(movie['id'])] = movie
 
-print("loaded movies metadata")
+endpoint = os.getenv('METARANK')
 
 @app.route('/')
 def hello():
@@ -35,13 +36,13 @@ def trending():
 @app.route('/rec/<int:movie>')
 def rec(movie):
     request = {'count': 6, 'items':[str(movie)]}
-    recs = {'ALS Matrix Factorization': metarank('similar', request), 'MiniLM-v2-L6': metarank('minilm', request), 'Cohere.ai': metarank('cohere', request)}
+    recs = {'ALS Matrix Factorization': metarank('similar', request), 'MiniLM-L6-v2': metarank('minilm', request), 'Cohere.ai': metarank('cohere', request)}
     return render_template('rec.html', movie=movies[str(movie)], recs=recs)
 
 
 def metarank(handle, request):
     items = []
-    for item in json.loads(requests.post('http://localhost:8080/recommend/'+handle, json=request).content)['items']:
+    for item in json.loads(requests.post(endpoint+'/recommend/'+handle, json=request).content)['items']:
         id = str(item['item'])
         movie = movies[id]
         items.append(movie)
