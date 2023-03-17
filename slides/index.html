@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Semantic recommendations with Qdrant, co:here and Metarank</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/serif.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img src="img/hackathon-logo.png" height="170px"  style="margin: 10px;">
+					<br><br>
+					<h2 style="margin: 0px;">Semantic recommendations</h2>
+					<br>
+					<small>A demo for the lablab.ai <strong>semantic search</strong> hackathon</small>
+					<br><br><br><br>
+					<p style="margin: 0px;"><small>Team <strong>metacrank</strong>, 2023</small></p>
+				</section>
+				<section>
+					<h2>The <strong>metacrank</strong> team of one</h2>
+					<img src="img/screaming_sun.png" height="300px">
+					<ul>
+						<li class="fragment">Long ago: PhD in CS, quant trading, credit scoring</li>
+						<li class="fragment">Past: Search &amp; personalization for ~7 years</li>
+						<li class="fragment">Now: <s>Unemployed</s> <s>Open-source contributor</s> Principal DS</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Recommendations 101</h2>
+					<p><img src="img/use-cases.png" height="300px"/></p>
+					<ul>
+						<li><strong>Similarity</strong> between a current context and a set of candidates</li>
+						<li><strong>Collaborative filtering</strong>: interactions of other people</li>
+						<li>SVD/ALS, BERT4rec/SASRec, LightFM, ...</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Recommendations cold-start problem</h3>
+					<p><img src="img/uroboros.png" height="300px"/></p>
+					<ul>
+						<li class="fragment">To have good recs, you need <strong>visitor feedback</strong></li>
+						<li class="fragment">For the feedback, you need to show <strong>good-enough</strong> recs</li>
+						<li class="fragment"><strong>But you can't</strong>, as you don't have the feedback yet!</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Content-based recommendations to the rescue</h3>
+					<p><img src="img/pawpatrol2crop.png" height="300px"/></p>
+					<p>
+						<ul>
+							<li>But we do have content: title and description!</li>
+							<li>Embedding of context ~= embedding of candidates</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h2>Semantic movie recommendations</h2>
+					<p><img src="img/terminator.jpg" height="250px"/></p>
+					<ul>
+						<li>Take MovieLens/TMDB as a source of clicks and metadata</li>
+						<li>Train MF ALS for a baseline CF recs</li>
+						<li>co:here/sbert embeddings of title+description, Qdrant for k-NN search</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<p><img src="img/semrec.png" height="300px"/></p>
+					<p><a href="http://semrec.dfdx.me">http://semrec.dfdx.me</a></p>
+				</section>
+				<section>
+					<h2>How it was made</h2>
+					<p><img src="img/metarank-mvp.png" height="200px"/></p>
+					<p>Glueing things together with Metarank:</p>
+					<ul>
+						<li class="fragment">Existing open-source project for recs/ranking</li>
+						<li class="fragment"><a href="https://github.com/metarank/metarank/pull/969">PR: semantic recommendations support</a></li>
+						<li class="fragment"><a href="https://github.com/metarank/metarank/pull/971">PR: qdrant knn-search support</a></li>
+						<li class="fragment">A simple Flask UI with Movielens/TMDB dataset</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Thanks!</h2>
+					<p><img src="img/qr.png" height="250px"/></p>
+					<small>
+					<ul>
+						<li>Demo source: <a href="https://github.com/shuttie/lablab-qdrant-cohere-hackathon">github.com/shuttie/lablab-qdrant-cohere-hackathon</a></li>
+						<li>Metarank: <a href="https://github.com/metarank/metarank">github.com/metarank/metarank</a></li>
+						<li>Demo: <a href="http://semrec.dfdx.me">http://semrec.dfdx.me</a></li>
+						<li>Slide deck: todo</li>
+					</ul>
+				</small>
+
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+                history: true,
+                controls: true,
+                progress: true,
+                width: 1200,
+                transition: 'none',
+                slideNumber: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
