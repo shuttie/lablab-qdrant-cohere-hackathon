@@ -88,6 +88,24 @@
 					</ul>
 				</section>
 				<section>
+					<h2>YAML ML FTW</h2>
+					<pre><code>
+  cohere:
+    type: semantic
+    itemFields: [title, description]
+    store:
+      type: qdrant
+      size: 4096
+      distance: Cosine
+      endpoint: "http://qdrant:6333"
+      collection: cohere
+
+    encoder:
+      type: csv
+      path: /conf/cohere-large.csv
+					</code></pre>
+				</section>
+				<section>
 					<h2>Thanks!</h2>
 					<p><img src="img/qr.png" height="250px"/></p>
 					<small>
